@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class CPSnippet{
+public class Main{
     // For fast input output
     static class FastReader {
         private BufferedReader br;
@@ -52,6 +52,22 @@ public class CPSnippet{
             return str;
         }
 
+        int[] nextIntArr(){
+            int [] intArr;
+
+            String input = nextLine();
+
+            String[] inputStr = input.split(" ");
+
+            intArr = new int[inputStr.length];
+
+            for(int i = 0; i<inputStr.length;i++){
+                intArr[i] = Integer.parseInt(inputStr[i]);
+            }
+
+            return intArr;
+        }
+
         void close() throws IOException{
             br.close();
         }
@@ -96,15 +112,7 @@ public class CPSnippet{
     public static void main(String[] args) throws IOException {
         FastReader reader = new FastReader();
         FastOutput writer = new FastOutput();
-        String input = reader.nextLine();
-        String[] strArr = input.split(" ");
-        int[] intArr = new int[strArr.length];
 
-        for (int i = 0; i < strArr.length; i++) {
-            intArr[i] = Integer.parseInt(strArr[i]);
-        }
-
-        writer.write(intArr);
         reader.close();
         writer.close();
 

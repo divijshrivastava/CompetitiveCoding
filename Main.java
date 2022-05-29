@@ -52,17 +52,17 @@ public class Main{
             return str;
         }
 
-        int[] nextIntArr(){
+        int[] nextIntArr(int skipNum){
             int [] intArr;
 
             String input = nextLine();
 
             String[] inputStr = input.split(" ");
 
-            intArr = new int[inputStr.length];
+            intArr = new int[inputStr.length-skipNum];
 
-            for(int i = 0; i<inputStr.length;i++){
-                intArr[i] = Integer.parseInt(inputStr[i]);
+            for(int i = skipNum, j=0; j<intArr.length;i++,j++){
+                intArr[j] = Integer.parseInt(inputStr[i]);
             }
 
             return intArr;
@@ -109,12 +109,14 @@ public class Main{
     }
 
     // end of fast i/o code
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) 
+    throws IOException {
         FastReader reader = new FastReader();
         FastOutput writer = new FastOutput();
-
+      
         reader.close();
         writer.close();
 
     }
+
 }

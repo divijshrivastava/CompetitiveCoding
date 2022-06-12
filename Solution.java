@@ -134,14 +134,11 @@ public class Solution {
     }
 
     public ArrayList<Integer> solve(final List<Integer> A) {
-        ArrayList<Integer> tempList = new ArrayList<>(A);
+        ArrayList<Integer> tempList = new ArrayList<>();
 
-        for(int i = 0; i<tempList.size()/2; i++){
-            int temp = tempList.get(i);
-            tempList.set(i, A.get(tempList.size()-i-1));
-            tempList.set(tempList.size()-i-1, temp);
+        for(int i = A.size()-1; i>-1; i--){
+            tempList.add(A.get(i));    
         }
-
         return tempList; 
     }
 

@@ -113,10 +113,39 @@ public class Main{
     throws IOException {
         FastReader reader = new FastReader();
         FastOutput writer = new FastOutput();
-      
+        int [] arr = reader.nextIntArr(1);
+        
+        int rotateBy = reader.nextInt();
+
+        arr = rotateBy%arr.length==0?arr:rotate(arr, rotateBy%arr.length);
+
+        writer.write(arr);
+
         reader.close();
         writer.close();
 
     }
 
+    private static int[] rotate(int[] arr, int rotateBy) {
+
+        arr = reverse(arr, 0, (arr.length-rotateBy-1));
+//        System.out.println(Arrays.toString(arr));
+        arr = reverse(arr, arr.length-rotateBy, arr.length-1);
+        arr = reverse(arr, 0, arr.length-1);
+        return arr;
+    }
+
+    private static int[] reverse(int[] arr, int startIndex, int endIndex){
+
+        for(int i = 0; i<=(endIndex - startIndex)/2; i++){
+            int temp = arr[startIndex + i];
+            arr[startIndex+ i] = arr[endIndex-i];
+            arr[endIndex-i] = temp;
+        }
+
+        return arr;
+    }
+
+     //1, 2, 3, 4, 5, 6, 7, 8
+    //6, 7, 8, 1, 2, 3, 4, 5
 }

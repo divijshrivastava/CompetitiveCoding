@@ -129,7 +129,6 @@ public class Main{
     private static int[] rotate(int[] arr, int rotateBy) {
 
         arr = reverse(arr, 0, (arr.length-rotateBy-1));
-//        System.out.println(Arrays.toString(arr));
         arr = reverse(arr, arr.length-rotateBy, arr.length-1);
         arr = reverse(arr, 0, arr.length-1);
         return arr;
@@ -146,6 +145,4 @@ public class Main{
         return arr;
     }
 
-     //1, 2, 3, 4, 5, 6, 7, 8
-    //6, 7, 8, 1, 2, 3, 4, 5
 }

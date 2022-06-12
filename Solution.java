@@ -1,26 +1,142 @@
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.io.*;
 
 public class Solution {
+    // For fast input output
+    static class FastReader {
+        private BufferedReader br;
+        StringTokenizer st;
 
-    public static void main(String[] args) {
-        List<Integer> A = Arrays.asList(1, 2, 4, 4); 
-        int B = 4;
-        
-        System.out.println(new Solution().solve(A, B));
-    }
-
-    public int solve(List<Integer> a, int b) {
-        
-        for(int i = 0; i<a.size(); i++){
-            for( int j = i+1; j<a.size(); j++){
-                if(a.get(i)+a.get(j)==b){
-                    return 1;
-                }
+        public FastReader() {
+            try {
+                br = new BufferedReader(
+                        new FileReader("./input.txt"));
+                PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
+                System.setOut(out);
+            } catch (Exception e) {
+                br = new BufferedReader(new InputStreamReader(System.in));
             }
         }
-        
+
+        String next() {
+            while (st == null || !st.hasMoreElements()) {
+                try {
+                    st = new StringTokenizer(br.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return st.nextToken();
+        }
+
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+
+        long nextLong() {
+            return Long.parseLong(next());
+        }
+
+        double nextDouble() {
+            return Double.parseDouble(next());
+        }
+
+        String nextLine() {
+            String str = "";
+            try {
+                str = br.readLine();
+                str = str.trim();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return str;
+        }
+
+        int[] nextIntArr(int skipNum) {
+            int[] intArr;
+            String input = nextLine();
+            String[] inputStr = input.split(" ");
+            intArr = new int[inputStr.length - skipNum];
+            for (int i = skipNum, j = 0; j < intArr.length; i++, j++) {
+                intArr[j] = Integer.parseInt(inputStr[i]);
+            }
+            return intArr;
+        }
+
+        ArrayList<Integer> nextIntArrayList(int skipNum) {
+            ArrayList<Integer> intArr;
+            String input = nextLine();
+            String[] inputStr = input.split(" ");
+            intArr = new ArrayList<>();
+            for (int i = skipNum, j = 0; j < inputStr.length; i++, j++) {
+                intArr.add(Integer.parseInt(inputStr[i]));
+            }
+            return intArr;
+        }
+
+        void close() throws IOException {
+            br.close();
+        }
+    }
+
+    static class FastOutput {
+        private BufferedWriter bo;
+
+        public FastOutput() {
+            try {
+                bo = new BufferedWriter(new FileWriter("./output.txt"));
+            } catch (Exception e) {
+                bo = new BufferedWriter(new OutputStreamWriter(System.out));
+            }
+        }
+
+        public void write(String str) throws IOException {
+            bo.write(str);
+        }
+
+        public void write(int a) throws IOException {
+            bo.write(String.valueOf(a));
+        }
+
+        public void write(int[] arr) throws IOException {
+            for (int a : arr) {
+                bo.write(String.valueOf(a));
+                bo.append(" ");
+            }
+        }
+
+        public void close() throws IOException {
+            bo.close();
+        }
+    }
+
+    // end of fast i/o code
+    public static void main(String[] args)
+            throws IOException {
+        FastReader reader = new FastReader();
+        FastOutput writer = new FastOutput();
+        ArrayList<Integer> inputList = reader.nextIntArrayList(0);
+        int t = reader.nextInt();
+        int a = solve(inputList, t);
+
+        writer.write(a);
+        reader.close();
+        writer.close();
+    }
+
+    public static int solve(ArrayList<Integer> arr, int t) {
+
+        Set<Integer> set = new HashSet<>();
+
+        for (int i = 0; i < arr.size(); i++) {
+
+            if (set.contains(t - arr.get(i))) {
+                return 1;
+            } else {
+                set.add(arr.get(i));
+            }
+        }
+
         return 0;
     }
-    
 }

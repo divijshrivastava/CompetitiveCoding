@@ -146,3 +146,16 @@ public class Main{
     }
 
 }
+
+/**
+ * 
+ * Problem Description
+Given an integer array A of size N and an integer B, you have to print the same array after rotating it B times towards the right.
+
+
+Problem Constraints
+1 <= N <= 106
+1 <= A[i] <=108
+1 <= B <= 109
+ * 
+ */

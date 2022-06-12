@@ -107,6 +107,15 @@ public class Main {
             bo.write(builder.toString().trim());
         }
 
+        public void write(List<Integer> arr) throws IOException {
+            StringBuilder builder = new StringBuilder();
+            for (int a : arr) {
+                builder.append(String.valueOf(a));
+                builder.append(" ");
+            }
+            bo.write(builder.toString().trim());
+        }
+
         public void close() throws IOException {
             bo.close();
         }
@@ -117,72 +126,27 @@ public class Main {
             throws IOException {
         FastReader reader = new FastReader();
         FastOutput writer = new FastOutput();
-        writer.write(findMaxAndMin(reader.nextIntArr(1)));
+
+        int testCases = reader.nextInt();
+        for (int i = 0; i < testCases; i++) {
+            int[] arr = reader.nextIntArr(1);
+            int temp = reader.nextInt();
+            writer.write(isPresent(arr, temp));
+            writer.write("\n");
+        }
+
         reader.close();
         writer.close();
     }
 
-    private static int[] findMaxAndMin(int[] nextIntArr) {
-        int min = Integer.MAX_VALUE;
-        int max = Integer.MIN_VALUE;
+    private static int isPresent(int[] arr, int temp) {
 
-        for (int i = 0; i < nextIntArr.length; i++) {
-            int temp = nextIntArr[i];
-            if (min > temp) {
-                min = temp;
-            }
-            if (max < temp) {
-                max = temp;
+        for(int i: arr){
+            if(temp==i){
+                return 1;
             }
         }
 
-        return new int[] { max , min};
+        return 0;
     }
 }
-
-/**
- * 
- * Problem Description
-
-Write a program to print maximum and minimum elements of the input array A of size N where you have to take integer N and other N elements as input from the user.
-
-
-
-Problem Constraints
-
-1 <= N <= 1000
-
-1 <= A <= 1000
-
-
-
-Input Format
-
-A single line representing N followed by N integers of the array A
-
-
-
-Output Format
-
-A single line containing two space separated integers representing maximum and minimum elements of the input array.
-
-
-Example Input
-
-Input 1:
-
-5 1 2 3 4 5
-Input 2:
-
-4 10 50 40 80
-
-
-Example Output
-
-Output 1:
-
-5 1
-Output 2:
-
-80 10
- */

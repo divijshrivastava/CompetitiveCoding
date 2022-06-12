@@ -99,10 +99,21 @@ public class Solution {
         }
 
         public void write(int[] arr) throws IOException {
+            StringBuilder builder = new StringBuilder();
             for (int a : arr) {
-                bo.write(String.valueOf(a));
-                bo.append(" ");
+                builder.append(String.valueOf(a));
+                builder.append(" ");
             }
+            bo.write(builder.toString().trim());
+        }
+
+        public void write(List<Integer> arr) throws IOException {
+            StringBuilder builder = new StringBuilder();
+            for (int a : arr) {
+                builder.append(String.valueOf(a));
+                builder.append(" ");
+            }
+            bo.write(builder.toString().trim());
         }
 
         public void close() throws IOException {
@@ -115,28 +126,79 @@ public class Solution {
             throws IOException {
         FastReader reader = new FastReader();
         FastOutput writer = new FastOutput();
-        ArrayList<Integer> inputList = reader.nextIntArrayList(0);
-        int t = reader.nextInt();
-        int a = solve(inputList, t);
+        List<Integer> input = reader.nextIntArrayList(0);
+        writer.write(new Solution().solve(input));
 
-        writer.write(a);
         reader.close();
         writer.close();
     }
 
-    public static int solve(ArrayList<Integer> arr, int t) {
+    public ArrayList<Integer> solve(final List<Integer> A) {
+        ArrayList<Integer> tempList = new ArrayList<>(A);
 
-        Set<Integer> set = new HashSet<>();
-
-        for (int i = 0; i < arr.size(); i++) {
-
-            if (set.contains(t - arr.get(i))) {
-                return 1;
-            } else {
-                set.add(arr.get(i));
-            }
+        for(int i = 0; i<tempList.size()/2; i++){
+            int temp = tempList.get(i);
+            tempList.set(i, A.get(tempList.size()-i-1));
+            tempList.set(tempList.size()-i-1, temp);
         }
 
-        return 0;
+        return tempList; 
     }
+
 }
+
+/**
+ * 
+ * 
+ * Problem Description
+You are given a constant array A.
+
+You are required to return another array which is the reversed form of the input array.
+
+
+
+Problem Constraints
+1 <= A.size() <= 10000
+
+1 <= A[i] <= 10000
+
+
+
+Input Format
+First argument is a constant array A.
+
+
+
+Output Format
+Return an integer array.
+
+
+
+Example Input
+Input 1:
+
+A = [1,2,3,2,1]
+Input 2:
+
+A = [1,1,10]
+
+
+Example Output
+Output 1:
+
+ [1,2,3,2,1] 
+Output 2:
+
+ [10,1,1] 
+
+
+Example Explanation
+Explanation 1:
+
+Reversed form of input array is same as original array
+Explanation 2:
+
+Clearly, Reverse of [1,1,10] is [10,1,1]
+
+
+ */

@@ -99,6 +99,17 @@
             "            bo.write(builder.toString().trim());",
             "       }",
             "",
+
+            "       public void write(int[] arr) throws IOException {",
+            "           StringBuilder builder = new StringBuilder();",
+            "           for (int a : arr) {",
+            "            builder.append(String.valueOf(a));",
+            "            builder.append(\" \");",
+            "            }",
+            "            bo.write(builder.toString().trim());",
+            "       }",
+            "",
+
             "       public void close() throws IOException{  ",
             "           bo.close();  ",
             "       }  ",

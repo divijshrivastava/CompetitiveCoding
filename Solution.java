@@ -65,10 +65,10 @@ public class Solution {
 
         ArrayList<Integer> nextIntArrayList(int skipNum) {
             ArrayList<Integer> intArr;
-            String input = nextLine();
+            String input = nextLine().trim();
             String[] inputStr = input.split(" ");
             intArr = new ArrayList<>();
-            for (int i = skipNum, j = 0; j < inputStr.length; i++, j++) {
+            for (int i = skipNum; i < inputStr.length; i++) {
                 intArr.add(Integer.parseInt(inputStr[i]));
             }
             return intArr;
@@ -107,15 +107,6 @@ public class Solution {
             bo.write(builder.toString().trim());
         }
 
-        public void write(List<Integer> arr) throws IOException {
-            StringBuilder builder = new StringBuilder();
-            for (int a : arr) {
-                builder.append(String.valueOf(a));
-                builder.append(" ");
-            }
-            bo.write(builder.toString().trim());
-        }
-
         public void close() throws IOException {
             bo.close();
         }
@@ -126,76 +117,76 @@ public class Solution {
             throws IOException {
         FastReader reader = new FastReader();
         FastOutput writer = new FastOutput();
-        List<Integer> input = reader.nextIntArrayList(0);
-        writer.write(new Solution().solve(input));
+        ArrayList<Integer> numList = reader.nextIntArrayList(0);
+
+        writer.write(new Solution().solve(numList));
 
         reader.close();
         writer.close();
     }
 
-    public ArrayList<Integer> solve(final List<Integer> A) {
-        ArrayList<Integer> tempList = new ArrayList<>();
+    public int solve(ArrayList<Integer> A) {
 
-        for(int i = A.size()-1; i>-1; i--){
-            tempList.add(A.get(i));    
+        int sum = 0;
+        int sumLeft= 0;
+        for (int i = 0; i < A.size(); i++) {
+            sum += A.get(i);
         }
-        return tempList; 
-    }
 
+        for(int i = 0; i<A.size(); i++){
+            if(sum - sumLeft-A.get(i)==sumLeft){
+                return i;
+            }
+            sumLeft+=A.get(i);
+        }
+
+
+        return -1;
+    }
 }
 
-/**
- * 
- * 
- * Problem Description
-You are given a constant array A.
 
-You are required to return another array which is the reversed form of the input array.
+/**
+ * Problem Description
+You are given an array A of integers of size N.
+
+Your task is to find the equilibrium index of the given array
+
+The equilibrium index of an array is an index such that the sum of elements at lower indexes is equal to the sum of elements at higher indexes.
+
+NOTE:
+
+Array indexing starts from 0.
+If there is no equilibrium index then return -1.
+If there are more than one equilibrium indexes then return the minimum index.
 
 
 
 Problem Constraints
-1 <= A.size() <= 10000
-
-1 <= A[i] <= 10000
-
+1 <= N <= 105
+-105 <= A[i] <= 105
 
 
 Input Format
-First argument is a constant array A.
-
+First arugment is an array A .
 
 
 Output Format
-Return an integer array.
-
+Return the equilibrium index of the given array. If no such index is found then return -1.
 
 
 Example Input
 Input 1:
-
-A = [1,2,3,2,1]
+A=[-7, 1, 5, 2, -4, 3, 0]
 Input 2:
 
-A = [1,1,10]
+A=[1,2,3]
 
 
 Example Output
 Output 1:
-
- [1,2,3,2,1] 
+3
 Output 2:
 
- [10,1,1] 
-
-
-Example Explanation
-Explanation 1:
-
-Reversed form of input array is same as original array
-Explanation 2:
-
-Clearly, Reverse of [1,1,10] is [10,1,1]
-
-
+-1
  */

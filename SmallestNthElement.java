@@ -1,6 +1,6 @@
 
 public class SmallestNthElement {
-
+//This solution won't work for duplicates.
     public static void main(String[] args) {
 
         int[] arr = new int[] { 4, 9, 10, 2, 5, 7 };
